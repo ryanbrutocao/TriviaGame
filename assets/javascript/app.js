@@ -27,18 +27,18 @@ var a2 = "";
 // done buttom
 // when time runs out
 //--------QUESTIONS---------//
-var questions = [  //---- need to save choices as a variable to check agains correct answer------//
+var questions = {  //---- need to save choices as a variable to check agains correct answer------// can this be an array? so that I can print each question with jquery on the startButton click?
  
-   q1,{ Number: 1,
+   q1:{ Number: 1,
     Question: "This is the first question",
     Answers:["choice 1", "choice 2", "choice 3"],
     Correct: "choice 1"},
-   q2,{ Number: 2,
+   q2:{ Number: 2,
     Question: "This should be different",
     Answers:["first choice", "second choice", "third choice"],
     Correct: "second choice"}
 
-   ]
+  }
   
   console.log(questions.q1.Question);
   console.log(questions.q1.Answers[2]);
@@ -75,6 +75,32 @@ $(".startButton").on("click", function() { // Wanting it to load the question an
 $(".startButton").on("click", function() {
   $(".answers").text(questions.q1.Answers);
 }); // this is its own event because it will create radio buttons on click
+//--------working here-----------//
+//working to get all possible answers to load with a radio button attached.. then want to run the check function to see if selected answer matches the correct answer.
+
+for (var i = 0; i < questions.q1.Answers.length; i++) {
+
+  // Inside the loop...
+
+  // 2. Create a variable named "letterBtn" equal to $("<button>");
+  var letterBtn = $("<button>");
+
+  // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
+  letterBtn.addClass("letter-button letter letter-button-color");
+
+  // 4. Then give each "letterBtn" a data-attribute called "data-letter".
+  letterBtn.attr("data-letter", questions.q1.Answers[i]);
+
+  // 5. Then give each "letterBtns" a text equal to "letters[i]".
+  letterBtn.text(questions.q1.Answers[i]);
+
+  // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
+  $(".questions").append(letterBtn);
+
+}
+
+
+
 
 
 // loads the check answer funcion
