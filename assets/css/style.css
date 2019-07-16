@@ -1,0 +1,17 @@
+.gameBox {
+  background-color:lightblue;
+  border: 2px black solid;
+  height: 40%;
+  width: 70%;
+}
+
+.titleText {
+  color: blueviolet;
+  font-size: 250%;
+}
+.startButton {
+  background-color: pink;
+  height: 35px;
+  width: 100px;
+  border: 2px solid black;
+}
