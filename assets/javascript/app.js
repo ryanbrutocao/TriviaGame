@@ -58,19 +58,19 @@ function countdown() {
     var questions = [  //---- need to save choices as a variable to check agains correct answer------// can this be an array? so that I can print each question with jquery on the startButton click?
      
        { Number: 1,
-        Question: "1. What is the first question?",
+        Question: "What is the first question?",
         Answers:["1. choice 1", "choice 2", "choice 3"],
         Correct: "choice 1"},
        { Number: 2,
-        Question: "2. What is the second question?",
+        Question: "What is the second question?",
         Answers:["2. first choice", "second choice", "third choice"],
         Correct: "second choice"},
        { Number: 3,
         Question: "3. What is the third question",
-        Answers:["3. 1st choice", "2nd choice", "3rd choice"],
+        Answers:["1st choice", "2nd choice", "3rd choice"],
         Correct: "2nd choice"},
        { Number: 4,
-        Question: "4. What is the 4th question",
+        Question: "What is the 4th question",
         Answers:["4. 1st answer", "2nd answer", "3rd answer"],
         Correct: "3rd answer"}
       
@@ -106,28 +106,39 @@ function countdown() {
 function questionLoader (){
   for (var i = 0; i < questions.length; i++) {  
   // number. 
-  var qaDiv =  $("<div>")
+  // var qaDiv =  $("<div>")
   var num = questions[i].Number;
   var q = questions[i].Question;
-  let a = questions[i].Answers
-  for (let j=0; j<a.length; j++){
-    console.log(questions[i].Answers[j]);
-    return;
-  }
-  var p=$("<p>").text(num);
+  let a = questions[i].Answers;
+  
+  var p=$("<span>").text(num + ". ");
+  $("#qa").append("<br>")
+  var qspan = $("<span>").text(q);
+  $("#qa").append(p)
+  $("#qa").append(qspan)
+  console.log(num);
 
-$(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
+  for (let j=0; j<a.length; j++){
+   var zebra =questions[i].Answers[j];
+   var rdiv = $("<div>");
+    var r = $("<input type='radio'>").html(zebra);
+    $("#qa").append(rdiv);
+    $("#qa").append(r);
+  }
+  // $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
   // load question on same line as number
   // on new line, load answers
   // give attribute of checkbox to each answer
   // mark each answer as unchecked
+  
+  
+  // look up .each and see how I can incorporate
+  // $(".questions").append(`<div>${questions[i].Question}</div>`)
+  // $(".questions").append(`<div>${questions[i].Answers}</div><br>`)
+  
+}
+}
 
-
-    // look up .each and see how I can incorporate
-    // $(".questions").append(`<div>${questions[i].Question}</div>`)
-    // $(".questions").append(`<div>${questions[i].Answers}</div><br>`)
-    
-  }
   
    
     
@@ -138,7 +149,7 @@ $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)
    
     // 2. Then give each "answerBtn" the following classes: "letter-button" "letter" "letter-button-color".
     // qButton.addClass("questions2")// adds a class of ".questions2" to the html elements we just created
-{/* <input type="radio"><span> */}
+// { <input type="radio"><span> }
 
   // 2. Then give each "answerBtn" a data-attributes of type=radio".
 //thinking I can call an answer loader function here instead of the line below. Might all0w me to get each answer as a radio type and could also 
@@ -154,7 +165,7 @@ $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)
   // 6. Finally, append each "answerBtn" to the "#buttons" div (provided).
 //   $(".answers").append(answerBtn);
 
-}
+
 //--------------------------------------------------------
 // this is not working for some reason
 // function answerLoader () {
