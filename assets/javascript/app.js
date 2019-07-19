@@ -119,11 +119,14 @@ function questionLoader (){
   console.log(num);
 
   for (let j=0; j<a.length; j++){
-   var zebra =questions[i].Answers[j];
-   var rdiv = $("<div>");
-    var r = $("<input type='radio'>").html(zebra);
+   var ans =questions[i].Answers[j];
+   var rdiv = $("<br>");
+   var rLabel = $("<label>")
+    var r = $("<input type='radio'>");
+  //  $("#qa").append(rLabel)
     $("#qa").append(rdiv);
     $("#qa").append(r);
+    $("#qa").append(ans)
   }
   // $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
   // load question on same line as number
