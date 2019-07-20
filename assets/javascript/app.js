@@ -14,7 +14,7 @@ var questions = "";
 var correctAnswer = "";
 var incorrectAnswer = "";
 var unanswered = "";
-var answerChosen = [];
+var answerChosen = false;
 var a1="";
 var a2 = "";
 
@@ -29,13 +29,6 @@ var a2 = "";
 // done buttom
 // when time runs out
 // var quests = {  //---- need to save choices as a variable to check agains correct answer------// can this be an array? so that I can print each question with jquery on the startButton click?
-
-// console.log(questions.q1.Question);
-// console.log(questions.q1.Answers[2]);
-// console.log(questions.q1.Correct);
-// console.log(questions.q2.Question);
-  // console.log(questions.q2.Answers[1]);
-  // console.log(questions.q2.Correct);
 
 //-----------Start Button--------------//
 // starts the timer
@@ -58,21 +51,25 @@ function countdown() {
     var questions = [  //---- need to save choices as a variable to check agains correct answer------// can this be an array? so that I can print each question with jquery on the startButton click?
      
        { Number: 1,
-        Question: "What is the first question?",
-        Answers:["1. choice 1", "choice 2", "choice 3"],
-        Correct: "choice 1"},
+        Question: "How many holes are played in a standard round of golf?",
+        Answers:["9", "12", "15", "18", "19"],
+        Correct: "18"},
        { Number: 2,
-        Question: "What is the second question?",
-        Answers:["2. first choice", "second choice", "third choice"],
-        Correct: "second choice"},
+        Question: "Which country won the most recent Womens World Cup?",
+        Answers:["America", "France", "Germany", "Spain"],
+        Correct: "America"},
        { Number: 3,
-        Question: "3. What is the third question",
-        Answers:["1st choice", "2nd choice", "3rd choice"],
-        Correct: "2nd choice"},
+        Question: "How much does a baseball weigh?",
+        Answers:["100 g", "135 g", "145 g", "175 g"],
+        Correct: "145 g"},
        { Number: 4,
-        Question: "What is the 4th question",
-        Answers:["4. 1st answer", "2nd answer", "3rd answer"],
-        Correct: "3rd answer"}
+        Question: "How many goals did Wayne Gretzky score in his professional career?",
+        Answers:["635", "721", "809", "894", "941"],
+        Correct: "894"},
+        { Number: 5,
+          Question: "How fast can Serena Williams serve a tennis ball?",
+          Answers:["97 MPH", "112 MPH", "123 MPH", "129 MPH", "141 MPH"],
+          Correct: "129 MPH"}
       
        ]
      console.table(questions)
@@ -86,27 +83,13 @@ function countdown() {
 });
 
 
-// let questiions = [{"child": ["one", "two", "three", "four"]}, 
-//                {"child": ["five", "six", "seven", "eight"]}];
-
-// for(let i = 0; i < questiions.length; i++){
-
-//    let aaanswers = questiions[i].child;
-
-//    for(let j = 0; j < aaanswers.length; j++){
-
-//   console.log(aaanswers[j]);
-
-//    }
-
-// }
 //--------working here-----------//
 //working to get all possible answers to load with a radio button attached.. then want to run the check function to see if selected answer matches the correct answer.
 // use this to build out the questions and then apply the same concepts to fill out the answers etc... 
 function questionLoader (){
   for (var i = 0; i < questions.length; i++) {  
   // number. 
-  // var qaDiv =  $("<div>")
+
   var num = questions[i].Number;
   var q = questions[i].Question;
   let a = questions[i].Answers;
@@ -120,62 +103,45 @@ function questionLoader (){
 
   for (let j=0; j<a.length; j++){
    var ans =questions[i].Answers[j];
-   var rdiv = $("<br>");
-   var rLabel = $("<label>")
-    var r = $("<input type='radio'>");
-  //  $("#qa").append(rLabel)
-    $("#qa").append(rdiv);
-    $("#qa").append(r);
-    $("#qa").append(ans)
+   var rBrk = $("<br>");
+   var r = $("<input type= checkbox>");
+ r.addClass("checked") 
+   $("#qa").append(rBrk)
+    $("#qa").append(r, ans);
+    console.log(typeof r);
+   
   }
+}};
+
+
+ $(document).on("click", function(){
+    $('input[type="checkbox"]').click(function(){
+        if($(this).is(":checked")){
+            $(this).addClass("true")
+        }
+        else if($(this).is(":not(:checked)")){
+          $(this).addClass("false")       }
+    })})  
+// I think I'm close, but I need true to be something checkable... like an ID. Then I need to figure a way
+// to check my correct answer agains the checked answer... if correct, increment correct score, if wrong increment wrong...
+
   // $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
   // load question on same line as number
   // on new line, load answers
   // give attribute of checkbox to each answer
   // mark each answer as unchecked
-  
-  
-  // look up .each and see how I can incorporate
-  // $(".questions").append(`<div>${questions[i].Question}</div>`)
-  // $(".questions").append(`<div>${questions[i].Answers}</div><br>`)
-  
-}
-}
+  //-----------------------------------------------------
+//   $("#qa").on('click', '[type=checkbox]', function() {
+//   if ("checkbox" === false) {
+//     $("check").html(true);
+//   } else if ("check" === true) {
+//     $("check").html(false);
+//     };
+//   })
 
-  
-   
-    
-    // answerBtn.addClass("answers2");
-    // answerBtn.attr("type","radio");
-
-
-   
-    // 2. Then give each "answerBtn" the following classes: "letter-button" "letter" "letter-button-color".
-    // qButton.addClass("questions2")// adds a class of ".questions2" to the html elements we just created
-// { <input type="radio"><span> }
-
-  // 2. Then give each "answerBtn" a data-attributes of type=radio".
-//thinking I can call an answer loader function here instead of the line below. Might all0w me to get each answer as a radio type and could also 
-//possibly make answer checking easier?
-
-
-  // 4. Then give each "answerBtn" a value of questions.q2.Answers"
-  // answerBtn.attr("value",Answers); //thinking q1 could possibly run on a for loop to get all answers for all questions??// 
-// console.log(Object.getOwnPropertyNames(questions).Answers);
-  // 5. Then give each "answerBtn" a text equal to "letters[i]".
-  // answerBtn.text(Object.getOwnPropertyNames(questions).Answers[i]);
-
-  // 6. Finally, append each "answerBtn" to the "#buttons" div (provided).
-//   $(".answers").append(answerBtn);
-
-
-//--------------------------------------------------------
-// this is not working for some reason
-// function answerLoader () {
-  // for ( let i=0; i<questions[i].Answers.length; i++) {
-   
-  //  return;
-  //   }}
+// }
+// }
+//---------------------------------------------------------
 
 //--------------------------------------------------------
 
@@ -186,14 +152,13 @@ function questionLoader (){
 
 // function answerChecker () {
 
-//   if (questions.q1.Correct === questions.q1.Answers){
+//   if (questions.Correct === questions.Answers){
 //   alert("you picked the correct answer");
 //   } else {
 //     alert(" wrong answer")
-//     break;
+//     return;
 //   }
 // };
-// console.log(answerChecker()); 
 
 
 
@@ -316,4 +281,4 @@ function questionLoader (){
 //tally correct answers function//
 //----- when done button is clicked
 //-----if timer runs out.
-//-----------____--------------//
+//-----------____--------------
