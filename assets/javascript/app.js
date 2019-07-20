@@ -11,9 +11,9 @@ var timer = 0;
 var questions = "";
  
 
-var correctAnswer = "";
-var incorrectAnswer = "";
-var unanswered = "";
+var correctAnswer = 0;
+var incorrectAnswer = 0;
+var unanswered = 0;
 var answerChosen = false;
 var a1="";
 var a2 = "";
@@ -66,10 +66,10 @@ function countdown() {
         Question: "How many goals did Wayne Gretzky score in his professional career?",
         Answers:["635", "721", "809", "894", "941"],
         Correct: "894"},
-        { Number: 5,
-          Question: "How fast can Serena Williams serve a tennis ball?",
-          Answers:["97 MPH", "112 MPH", "123 MPH", "129 MPH", "141 MPH"],
-          Correct: "129 MPH"}
+      { Number: 5,
+        Question: "How fast can Serena Williams serve a tennis ball?",
+        Answers:["97 MPH", "112 MPH", "123 MPH", "129 MPH", "141 MPH"],
+        Correct: "129 MPH"}
       
        ]
      console.table(questions)
@@ -79,7 +79,8 @@ function countdown() {
       $(".startButton").hide(); //removes start button from view when clicked
       // toggle on a 'done' button? have it start set to 'false'
       $(".gameBox").append("<button>")
-      
+      $(".gameBox").addClass("<button>","doneBtn")// trying to add a class or id or something so I can add adone() function
+
   questionLoader();  // loads questions and answers to the screen
   
 });
@@ -111,8 +112,7 @@ function questionLoader (){
    r.attr("data-checked", false) 
    $("#qa").append(rBrk)
     $("#qa").append(r, ans);
-    console.log(typeof r);
-   
+    
   }
 }};     
 
@@ -127,23 +127,12 @@ function questionLoader (){
     })})  
 
 
-  // $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
+
   // load question on same line as number
   // on new line, load answers
   // give attribute of checkbox to each answer
   // mark each answer as unchecked
   //-----------------------------------------------------
-//   $("#qa").on('click', '[type=checkbox]', function() {
-//   if ("checkbox" === false) {
-//     $("check").html(true);
-//   } else if ("check" === true) {
-//     $("check").html(false);
-//     };
-//   })
-
-// }
-// }
-//---------------------------------------------------------
 
 //--------------------------------------------------------
 
@@ -151,16 +140,25 @@ function questionLoader (){
 //loads the 'tally correct answer function' at the end of the function
 
 //-----------Question/answer checker--------------//
+function answerChecker () {
+  for (var i = 0; i < questions[i].Correct; i++){
+  console.log(questions[i].Correct);
+  for (let j=0; j<questions[i].Correct.length; j++){
+    console.log(questions[i].Correct[j]);
+  if (("data-checked" === true) && ("data-qa" === questions[i].Correct[j])){
+  alert("you picked the correct answer")
+  correctAnswer++;}
+  else if(("data-checked" === true) && ("data-qa" != questions[i].Correct[j]) ){
 
-// function answerChecker () {
+alert("Wrong!")
+incorrectAnswer++;
+  }
+  else if(("data-checked" === false) && ("data-qa" != questions[i].Correct[j]) ){
 
-//   if (questions.Correct === questions.Answers){
-//   alert("you picked the correct answer");
-//   } else {
-//     alert(" wrong answer")
-//     return;
-//   }
-// };
+    alert("unanswered, but could also be counting all wrong/unchecked answers too")
+    unanswered++;
+      }}
+}};answerChecker();
 
 
 
