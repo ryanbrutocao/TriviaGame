@@ -78,6 +78,8 @@ function countdown() {
 
       $(".startButton").hide(); //removes start button from view when clicked
       // toggle on a 'done' button? have it start set to 'false'
+      $(".gameBox").append("<button>")
+      
   questionLoader();  // loads questions and answers to the screen
   
 });
@@ -105,25 +107,25 @@ function questionLoader (){
    var ans =questions[i].Answers[j];
    var rBrk = $("<br>");
    var r = $("<input type= checkbox>");
- r.addClass("checked") 
+   r.attr("data-qa", ans) 
+   r.attr("data-checked", false) 
    $("#qa").append(rBrk)
     $("#qa").append(r, ans);
     console.log(typeof r);
    
   }
-}};
+}};     
 
 
  $(document).on("click", function(){
     $('input[type="checkbox"]').click(function(){
         if($(this).is(":checked")){
-            $(this).addClass("true")
+            $(this).attr("data-checked", true)
         }
         else if($(this).is(":not(:checked)")){
-          $(this).addClass("false")       }
+          $(this).attr("data-checked", false)       }
     })})  
-// I think I'm close, but I need true to be something checkable... like an ID. Then I need to figure a way
-// to check my correct answer agains the checked answer... if correct, increment correct score, if wrong increment wrong...
+
 
   // $(".qa").append(`<div>${qaDiv ,num + " " , q }</div><br>`)  
   // load question on same line as number
