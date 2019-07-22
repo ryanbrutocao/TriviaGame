@@ -66,32 +66,33 @@ function countdown() {
         Question: "How many goals did Wayne Gretzky score in his professional career?",
         Answers:["635", "721", "809", "894", "941"],
         Correct: "894"},
-      { Number: 5,
+      {  Number: 5,
         Question: "How fast can Serena Williams serve a tennis ball?",
         Answers:["97 MPH", "112 MPH", "123 MPH", "129 MPH", "141 MPH"],
         Correct: "129 MPH"}
       
        ]
      console.table(questions)
-
+     
     $(".startButton").on("click", function() {     // && starts the game on click
-
       $(".startButton").hide(); //removes start button from view when clicked
+      $(".doneBttn").attr('style', "visibility:visible"); // Makes the "Done" button appear when start button is clicked
+      
       // toggle on a 'done' button? have it start set to 'false'
-      $(".gameBox").append("<button>")
-      $(".gameBox").addClass("<button>","doneBtn")// trying to add a class or id or something so I can add adone() function
+      // $(".gameBox").addClass("<button>","doneBtn")// trying to add a class or id or something so I can add a done() function
 
   questionLoader();  // loads questions and answers to the screen
   
 });
 
+// answerChecker();
 
 //--------working here-----------//
 //working to get all possible answers to load with a radio button attached.. then want to run the check function to see if selected answer matches the correct answer.
 // use this to build out the questions and then apply the same concepts to fill out the answers etc... 
 function questionLoader (){
   for (var i = 0; i < questions.length; i++) {  
-  // number. 
+    // number. 
 
   var num = questions[i].Number;
   var q = questions[i].Question;
@@ -102,14 +103,15 @@ function questionLoader (){
   var qspan = $("<span>").text(q);
   $("#qa").append(p)
   $("#qa").append(qspan)
-  console.log(num);
+  // console.log(num);
 
   for (let j=0; j<a.length; j++){
    var ans =questions[i].Answers[j];
    var rBrk = $("<br>");
    var r = $("<input type= checkbox>");
-   r.attr("data-qa", ans) 
-   r.attr("data-checked", false) 
+   r.attr("data-name", num)
+   r.attr("value", ans) 
+   r.addClass("false") 
    $("#qa").append(rBrk)
     $("#qa").append(r, ans);
     
@@ -117,48 +119,90 @@ function questionLoader (){
 }};     
 
 
- $(document).on("click", function(){
-    $('input[type="checkbox"]').click(function(){
-        if($(this).is(":checked")){
-            $(this).attr("data-checked", true)
-        }
-        else if($(this).is(":not(:checked)")){
-          $(this).attr("data-checked", false)       }
+$(document).on("click", function(){
+  $('input[type="checkbox"]').click(function(){
+    if($(this).is(":checked")){
+      $(this).attr("class", true)
+    }
+    else if($(this).is(":not(:checked)")){
+      $(this).attr("class", false)       }
     })})  
+    
+    
+    
+    // load question on same line as number
+    // on new line, load answers
+    // give attribute of checkbox to each answer
+    // mark each answer as unchecked
+    //-----------------------------------------------------
+    
+    //--------------------------------------------------------
+    
+    // loads the check answer funcion
+    //loads the 'tally correct answer function' at the end of the function
 
 
-
-  // load question on same line as number
-  // on new line, load answers
-  // give attribute of checkbox to each answer
-  // mark each answer as unchecked
-  //-----------------------------------------------------
-
-//--------------------------------------------------------
-
-// loads the check answer funcion
-//loads the 'tally correct answer function' at the end of the function
+    
 
 //-----------Question/answer checker--------------//
+// can I push the checked answer to an array at pos (number)
 function answerChecker () {
-  for (var i = 0; i < questions[i].Correct; i++){
-  console.log(questions[i].Correct);
-  for (let j=0; j<questions[i].Correct.length; j++){
-    console.log(questions[i].Correct[j]);
-  if (("data-checked" === true) && ("data-qa" === questions[i].Correct[j])){
-  alert("you picked the correct answer")
-  correctAnswer++;}
-  else if(("data-checked" === true) && ("data-qa" != questions[i].Correct[j]) ){
-
-alert("Wrong!")
-incorrectAnswer++;
+ $.each( $( "input:checkbox" ), "[class=true]")
+  for (let i=0; i<questions[i].Correct.length; i++){
+    if (questions[i].Correct == $("input[value]"))
+    {alert("This is it")}
   }
-  else if(("data-checked" === false) && ("data-qa" != questions[i].Correct[j]) ){
+}
 
-    alert("unanswered, but could also be counting all wrong/unchecked answers too")
-    unanswered++;
-      }}
-}};answerChecker();
+answerChecker()
+
+
+$(".doneBttn").on("click", function() { 
+
+});
+
+// for (let i=0; i<questions.length; i++) {
+  //   console.log(questions[i].Number);
+  //   console.log(questions[i].Answers);
+  //   console.log(questions[i].Correct);
+    
+  //   // for (let j=0; j<questions[i].Correct.length; j++){
+  //     var chosen = (questions[i].Number).attr("data-checked", [true || false])
+  //     console.log(chosen);
+  //   // console.log($(""));
+
+  //       // if ( == "true")
+  //       // // && ($("data-qnum") == questions[i].Number)
+  //       // // && ($("data-correct") == questions[i].Correct ))
+  //       // {
+  //       //   alert("Correct!!") 
+  //       // }
+  //       // else{
+  //       // //  alert("false")
+  //       // }}
+  //   // // for the answer checked.... if answer[j] = question i and checked
+  //   } }
+    // if question[i].Answer
+    // for (let j=0; j=questions.Number)
+    // if (($("data-checked") === true) && ($("data-correct") === questions[i].Correct)){
+    //   alert("you picked the correct answer");
+    //   // correctAnswer++
+    //   ;}
+    
+  
+  // else if(("data-checked" === true) && ("data-qa" != questions[i].Correct[j]) ){
+  
+  // alert("Wrong!")
+  // incorrectAnswer++;
+  // }
+  // else if(("data-checked" === false) && ("data-qa" != questions[i].Correct[j]) ){
+
+  // alert("unanswered, but could also be counting all wrong/unchecked answers too")
+  // unanswered++;
+  //       }
+      
+// }};
+// answerChecker();
 
 
 
@@ -182,34 +226,11 @@ incorrectAnswer++;
 
 
 
-// setTimeout(fiveSeconds, 1000 * 5);
 
  
 
 /////////////////////-------------------///////////////////////////
 
-
-
-
-  //   q1:{ Number: 1,
-  //    Question: "This is the first question",
-  //    Answers:["choice 1", "choice 2", "choice 3"],
-  //    Correct: "choice 1"},
-  //   q2:{ Number: 2,
-  //    Question: "This second one should be different",
-  //    Answers:["first choice", "second choice", "third choice"],
-  //    Correct: "second choice"},
-  //   q3:{ Number: 3,
-  //    Question: "This is the third question",
-  //    Answers:["1st choice", "2nd choice", "3rd choice"],
-  //    Correct: "2nd choice"},
-  //   q4:{ Number: 4,
-  //    Question: "This should be a 4th question",
-  //    Answers:["1st answer", "2nd answer", "3rd answer"],
-  //    Correct: "3rd answer"}
-   
-  //  }
- 
 
   // function aLoader (key,value){
   //   for (var i = 0; i < quests.q1.Answers.length; i++) {  //-----possible that I can use a function here?(questions.q1.Answers.length) so that it goes to all question sets?-----//
