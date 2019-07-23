@@ -7,19 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./assets/css/reset.css">
 <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
+  <body class="bg" >
+    
+<button id="start">start</button>
+<div class="qa" ><span id="quiz-area"></span><br>
 
-      <div class="gameBox">
-        <div class="titleText">This is the game box </div>
-        <div class="timer"><span id="timer2"></span></div>
-        <button onclick="countdown()" answerChecker() class="startButton"> start button</button> 
-      <!-- <button onclick = >done button</button> -->
-  <div id="qa" ><span></span></div>
-<div><button class="doneBttn" type="submit" value="Submit Answer" style="visibility:hidden">Done</button></div>
+
+<div><span id="timer2"></span></div>
+<div class="done"><button id="done">done</button></div>
+</div>
+  <div id="results">
+    <div class="results">Incorrect Answers:<span id="incorrect"></span></div>
+    <div class="results">Unanswered:<span id="unchecked"></span></div>
+    <div class="results">Correct Answers: <span id="correct"> </span> </div> 
   </div>
+
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

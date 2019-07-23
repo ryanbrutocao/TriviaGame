@@ -36,30 +36,52 @@ var questions = [
 ];
 
 //variable that holds setInterval
-var timer;
+// timer = 3;   
+
 
 var game = {
- correctAnswer: 0,
- inCorrectAnswer: 0,
- counter: 120,
+  totalQs: 0,
+  unanswered: 0,
+  correctAnswer: 0,
+  inCorrectAnswer: 0,
+  counter: 120,
+  timer: 3,
 
- //write method utilized for countdown
- countdown: function() {
+  
+countdown: function() {
+  game.timer;
   setInterval(function(){
-    timer;
-    if (timer==0){
+    
+    if (game.timer===0){
       setInterval(function() {
-        alert("Time's up!");},10);
+          done();},10);
       }
-      $("#timer2").text(timer--); }, 1000);
- },
+      $("#timer2").text(game.timer--); }, 1000);
+    
+    },
+
+
+   
+ //write method utilized for countdown
+//  countdown: function() {
+
+//   setInterval(function(){
+//    counter;
+//     if (counter==0){
+//       setInterval(function() {
+//         alert("Time's up!");},10);
+//       }
+//       $("#timer2").text(counter--); }, 1000);
+//  },
 
  
 
  //write method to start timer and prepend time remaining to div you want to utilize for time remaining. create for loop over questions array and append to card variable. ex: card.append("<h2>" + questions[i] + question + "<h2>"). then write a nested for loop over questions.Answers.length and append <input type="radio">
  startGame: function() {
    for (var i = 0; i < questions.length; i++) {
-     card.append("<h2>" + questions[i].Question + "</h2>");
+    totalQs= questions[i].Number;
+    console.log(totalQs);
+     card.append("<h4>" + questions[i].Question + "</h4>");
      for (var j = 0; j < questions[i].Answers.length; j++) {
        card.append("<input type='radio' name='question-" + i +
          "' value='" + questions[i].Answers[j] + "''>" + questions[i].Answers[j]);
@@ -71,39 +93,62 @@ var game = {
  //create an inputs variable and assign a value of card.children("input:checked")
  //create a for loop that iterates over inputs.length and use an if/else to check if input[i].val() === questions[i].correctAnswer. if so increment game.correctAnswer by 1 else  increment game.inCorrectAnwer by 1
  done: function() {
-var inputs = card.children("input:checked");
-console.log('card.children("input:checked")', card.children("input:checked"));
-for (i=0; i<inputs.length; i++){
-  console.log("inputs.length:", inputs.length);
-  console.log("input:checked");
-  for (j=0; j<questions[i].Correct.length; j++)
-
-  if (inputs.val() == questions[i].Correct[j]){
-    console.log("inputs.val() :", inputs.val());
-    console.log("questions[i].Correct[j] :", questions[i].Correct[j]);
-    game.correctAnswer++;
-    console.log("game.correctAnswer",game.correctAnswre);
-  } else {
-    game.inCorrectAnswer++;
-    console.log("game.inCorrectAnswer",game.inCorrectAnswer);
+   var inputs = card.children("input:checked");
+   console.log('card.children("input:checked")', card.children("input:checked"));
+   console.log(card.children());
+      
+    for (i=0; i<inputs.length; i++){
+  console.log("inputs[i]:", inputs[i]);
+  console.log("input[i] checked value :", inputs[i].value);
+  for (j=0; j<questions[i].Correct[j].length; j++){
+    console.log("questions[i].correct: ", questions[i].Correct);
+    if (inputs[i].value == questions[i].Correct){
+      console.log("inputs.val() :", inputs.val());
+      game.correctAnswer++;
+      game.result();
+      console.log("game.correctAnswer",game.correctAnswer);
+    } 
+    
+    else {
+      game.inCorrectAnswer++;
+      game.result();
+      console.log("game.inCorrectAnswer",game.inCorrectAnswer);
+    }}
+    unanswered = totalQs - game.correctAnswer - game.inCorrectAnswer 
+    $("#unchecked").text(unanswered)
+    
+    console.log("total Qs: ",totalQs);
+    console.log("correctAnwer:", game.correctAnswer);
+    console.log("inCorrectAnwer:", game.inCorrectAnswer);
+    console.log("unanswered:", unanswered);
   }
+  // unchecked -  take if number of ansers in array === number of unchecked, unanswered++
+  // console.log(unanswered);
+},
+result: function() {
+  $("#correct").text(game.correctAnswer);
+  $("#incorrect").text(game.inCorrectAnswer);
+
 }
-  
- },
 
  //create result method to display to user correct answers and incorrect answers
- result: function() {
-   $("#correct").text(game.correctAnswer);
-   $("#incorrect").text(game.inCorrectAnswer);
-
- }
 };
 
 //CLICK EVENTS
+$(document).ready(function(){
+  $("#done").hide()
+  $("#results").hide();
+});
+
 $(document).on("click", "#start", function() {
  game.startGame();
+ game.countdown();
+ $("#start").hide();
+ $("#done").attr('style', "visibility: visible");
+ //  $(".doneBttn").attr('style', "visibility:visible");
 });
 
 $(document).on("click", "#done", function() {
- game.done();
+  game.done();
+  $("#results").attr('style', "visibility: visible");
 });
