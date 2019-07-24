@@ -44,7 +44,7 @@ var game = {
   unanswered: 0,
   correctAnswer: 0,
   inCorrectAnswer: 0,
-  counter: 3,
+  counter: 50,
   
 
     
