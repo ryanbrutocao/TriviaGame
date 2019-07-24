@@ -53,11 +53,11 @@ countdown: function() {
   setInterval(function(){
     
     if (game.counter===0){
-      setInterval(function() {
-          game.done();},10);
-          $(".qa").hide();
-           $("#results").attr('style', "visibility: visible");
-      }
+      
+      game.done();
+      $(".qa").hide();
+       $("#results").attr('style', "visibility: visible");
+    }
       $("#timer2").text(game.counter--); }, 1000);
     
     },
@@ -100,7 +100,7 @@ countdown: function() {
     console.log("questions[i].Correct[j] :", questions[i].Correct[j]);
 
     // if ( questions[i].Correct == inputs[j].value){
-   if ( inputs[i].value == questions[i].Correct){
+   if ( inputs[i].value.trim() == questions[i].Correct){
      game.correctAnswer++;
      game.result();
      console.log("inputs.val() :", inputs.val());
