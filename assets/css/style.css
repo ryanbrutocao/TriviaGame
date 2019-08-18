@@ -1,12 +1,16 @@
 #quiz-area {
-  background-color: rgba(171, 253, 229, 0.671);
+  /* background-color: rgba(171, 253, 229, 0.671); */
   width: 75%;
   margin: 0 auto;
   text-align: center;
+  flex-direction: row;
+  justify-content: space-around;
   
 }
 
-
+input {
+  padding-left: 10px;
+  margin-left: 10%;}
 .qa {
   margin:auto;
   margin-top: 15%;

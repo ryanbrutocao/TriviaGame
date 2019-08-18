@@ -129,6 +129,7 @@ countdown: function() {
 result: function() {
   $("#correct").text(game.correctAnswer);
   $("#incorrect").text(game.inCorrectAnswer);
+  
 
 }
 
@@ -155,4 +156,6 @@ $(document).on("click", "#done", function() {
   game.done();
   $(".qa").hide();
   $("#results").attr('style', "visibility: visible");
+  $("#timer2").hide()
+  $("#done").hide()
 });
