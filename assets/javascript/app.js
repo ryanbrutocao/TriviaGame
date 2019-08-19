@@ -67,7 +67,7 @@ countdown: function() {
  startGame: function() {
    for (var i = 0; i < questions.length; i++) {
     totalQs= questions[i].Number;
-    console.log(totalQs);
+    // console.log(totalQs);
      card.append("<h4 class='headingQ'>" + questions[i].Question + "</h4>");
     //  card.addClass('card')
      
@@ -84,27 +84,27 @@ countdown: function() {
  //create a for loop that iterates over inputs.length and use an if/else to check if input[i].val() === questions[i].correctAnswer. if so increment game.correctAnswer by 1 else  increment game.inCorrectAnwer by 1
  done: function() {
    var inputs = card.children("input:checked");
-   console.log('card.children("input:checked")', card.children("input:checked"));
-   console.log(card.children());
+  //  console.log('card.children("input:checked")', card.children("input:checked"));
+  //  console.log(card.children());
       
   for (i=0; i<inputs.length; i++){
-  console.log("inputs[i]:", inputs[i]);
+  // console.log("inputs[i]:", inputs[i]);
 
   for (j=0; j<questions[i].Correct[j].length; j++){
-    console.log("questions[i].correct: ", questions[i].Correct);
-    console.log("input[i] checked value :", inputs[i].value);
-    console.log("questions[j].correct: ", questions[j].Correct);
-    console.log("input[j] checked value :", inputs[j].value);
+    // console.log("questions[i].correct: ", questions[i].Correct);
+    // console.log("input[i] checked value :", inputs[i].value);
+    // console.log("questions[j].correct: ", questions[j].Correct);
+    // console.log("input[j] checked value :", inputs[j].value);
 
-    console.log("inputs.val() :", inputs.val());
-    console.log("questions[i].Correct[j] :", questions[i].Correct[j]);
+    // console.log("inputs.val() :", inputs.val());
+    // console.log("questions[i].Correct[j] :", questions[i].Correct[j]);
 
     // if ( questions[i].Correct == inputs[j].value){
    if ( inputs[i].value.trim() == questions[i].Correct){
      game.correctAnswer++;
-     game.result();
-     console.log("inputs.val() :", inputs.val());
-     console.log("game.correctAnswer",game.correctAnswer);
+    //  game.result();
+    //  console.log("inputs.val() :", inputs.val());
+    //  console.log("game.correctAnswer",game.correctAnswer);
     } 
     
     else {
